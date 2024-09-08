@@ -12,4 +12,15 @@ app.listen(8000, () => {
     
 }) 
 
+## enviroment variable configuration
 
+- npm i dotenv
+
+# app.js
+const dotenv = require('dotenv');
+const path = require('path');
+dotenv.config({path: path.join(__dirname, 'config', 'config.env')})
+
+app.listen(process.env.PORT, () => {
+    console.log(`server listening to ${process.env.PORT}  in ${process.env.NODE_ENV}`);
+})
