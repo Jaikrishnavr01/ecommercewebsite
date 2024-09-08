@@ -1,8 +1,6 @@
-exports.createOrder = (req,res, next) => {
-    res.json(
-        {
-            success:true,
-            message: "order works!"
-        }
-    )
+exports.createOrder = (req, res, next) => {
+    res.json({
+        success: true,
+        message: "order works!"
+    })
 }

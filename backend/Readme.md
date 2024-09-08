@@ -54,7 +54,7 @@ exports.getSingleProducts=(req, res, next) => {
 
 ## product.js
 router.route('/products').get(getProducts);
-router.route('/products/:id').get(getSingleProducts);
+router.route('/product/:id').get(getSingleProducts);
 
 module.exports = router;
 
@@ -78,3 +78,17 @@ exports.createOrder = (req,res, next) => {
         }
     )
 }
+
+
+# Testing Api routes with THUNDERCLIENT / POSTMAN 
+
+
+## app.js
+const products  = require('./routes/products');
+const orders =require('./routes/order');
+
+app.use('/api/v1/', products);
+app.use('/api/v1/', orders);
+
+
+
