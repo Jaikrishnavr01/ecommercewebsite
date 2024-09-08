@@ -91,4 +91,24 @@ app.use('/api/v1/', products);
 app.use('/api/v1/', orders);
 
 
+# connecting to database
 
+* monogoDB connection string - mongodb://localhost:27017/
+
+- install mongoose ---> npm i mongoose
+
+## connectDatabase.js
+const mongoose = require('mongoose')
+
+const connectDatabase = () => {
+    mongoose.connect(process.env.DB_URL).then((con)=> {
+        console.log('MongoDB connected to host: '+ con.connection.host)
+    })
+};
+
+module.exports = connectDatabase;
+
+## app.js
+const connectDatabase = require('./config/connectDatabase')
+
+connectDatabase();
