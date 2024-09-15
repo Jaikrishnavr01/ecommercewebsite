@@ -118,6 +118,7 @@ connectDatabase();
 
 ### models --> productModel.js
 ## productModel.js
+
 const mongoose = require('mongoose');
 
 const productSchema =  new mongoose.Schema({
@@ -195,4 +196,47 @@ try {
         message: error.message
     })
 }
+}
+
+# Building Order Api
+
+## -> orderModel.js
+
+const mongoose = require(mongoose)
+
+const orderSchema = new mongoose.Schema({
+    cartItems: Array,
+    amount: String,
+    status:String,
+    createdAt: Date
+})
+
+const orderModel = mongoose.model('Order', orderSchema);
+
+module.exports =orderModel;
+
+
+
+## -> order controller.js
+
+const orderModel = require('../models/orderModel')
+
+
+// create order  ->  /api/v1/order
+exports.createOrder = async (req, res, next) => {
+
+    // console.log(req.body, 'data');
+    const cartItems = req.body;
+    const amount = Number(cartItems.reduce((acc, item) => (acc + item.product.price * item.qty), 0)).toFixed(2);
+    console.log(amount, ' Amount');
+
+    const status = "Pending";
+
+    const order = await orderModel.create({ cartItems, amount, status })
+
+    res.json({
+        success: true,
+        order,
+        message: "order works!"
+    })
 }
