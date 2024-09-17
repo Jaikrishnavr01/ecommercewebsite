@@ -984,4 +984,85 @@ export default function ProductCard() {
     .then(res => res.json())
     .then(res => setProducts(res))
 
-  })
+  }, [])
+
+
+# showing product card details from backend
+
+import React, { useEffect, useState } from 'react'
+import ProductCard from '../components/ProductCard'
+
+export default function Home() {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_API_URL+'/products')
+    .then(res => res.json())
+    .then(res => setProducts(res.products))
+
+  }, [])
+
+  return  <>
+    <h1 id="products_heading">Latest Products</h1>
+
+    <section id="products" class="container mt-5">
+      
+      <div class="row">
+        {products.map(product => <ProductCard product={product}/>)}
+      </div>
+
+    </section>
+  </>
+}
+
+
+## product.js
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+export default function ProductCard({product}) {
+  return <div class="col-sm-12 col-md-6 col-lg-3 my-3">
+  <div class="card p-3 rounded">
+    <img
+      class="card-img-top mx-auto"
+      src={product.images[0].image}
+    />
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">
+      <Link to={"/product/"+product._id}>  <a href="">{product.name}</a></Link>
+      </h5>
+      <div class="ratings mt-auto">
+        <div class="rating-outer">
+          <div class="rating-inner"style={{width: `${product.ratings/5*100}%`}} ></div>
+        </div>
+      </div>
+      <p class="card-text">{product.price}</p>
+      <Link to={"/product/"+product._id}> <a href="#" id="view_btn" class="btn btn-block">View Details</a></Link>
+    </div>
+  </div>
+</div>
+}
+
+## app.js
+import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Home from './pages/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <Router>
+        <Routes>
+        <Route path='/' element={<Home />} />
+        </Routes>
+      </Router>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
