@@ -977,3 +977,11 @@ export default function ProductCard() {
 </div>
 }
 
+# Intergrating get Products Api
+## home.js
+  useEffect(() => {
+    fetch(process.env.REACT_APP_API_URL+'/products')
+    .then(res => res.json())
+    .then(res => setProducts(res))
+
+  })

@@ -240,3 +240,13 @@ exports.createOrder = async (req, res, next) => {
         message: "order works!"
     })
 }
+
+# fixing cors error
+## install cors
+
+* npm i cors
+
+### app.js
+const cors = require('cors')
+
+app.use(cors())
