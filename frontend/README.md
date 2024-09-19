@@ -1067,3 +1067,55 @@ function App() {
 
 export default App;
 
+# implementing Product Search
+
+## search.js
+
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
+export default function Search() {
+    const [keyword, setKeyword] = useState("")
+    const navigate = useNavigate();
+    const searchHandler = () => {
+        navigate('/search/?keyword=' + keyword)
+    }
+
+    return <div class="input-group">
+        <input
+            type="text"
+            id="search_field"
+            onChange={(e) => setKeyword(e.target.value)}
+            class="form-control"
+            onBlur={searchHandler}
+            placeholder="Enter Product Name ..."
+        />
+        <div class="input-group-append">
+            <button onClick={searchHandler} id="search_btn" class="btn">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+}
+
+## header.js
+      <Link to='/'>
+      <img width="150px" src="/images/logo.png" />
+      </Link>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6 mt-2 mt-md-0">
+    <Search/>
+  </div>
+
+## app.js 
+      <Router>
+      <Header />
+        <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/search' element={<Home/>} />
+        </Routes>
+      </Router>
+      <Footer />
+
