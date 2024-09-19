@@ -250,3 +250,22 @@ exports.createOrder = async (req, res, next) => {
 const cors = require('cors')
 
 app.use(cors())
+
+
+
+# adding search to get products api 
+
+exports.getProducts = async(req, res, next) => {
+   const query =  req.query.keyword?{ name : { 
+        $regex: req.query.keyword,
+        $options: 'i'
+    }}:{};
+  const products = await ProductModel.find(query);
+    res.json({
+        success:true,
+        products,
+        message: 'Get products working!'
+    })
+}
+
+
