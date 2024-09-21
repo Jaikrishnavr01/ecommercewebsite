@@ -2,7 +2,7 @@ import React from 'react'
 import Search from './Search'
 import { Link } from 'react-router-dom'
 
-export default function Header() {
+export default function Header({cartItems}) {
   return <nav class="navbar row">
   <div class="col-12 col-md-3">
     <div class="navbar-brand">
@@ -18,7 +18,7 @@ export default function Header() {
 
   <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
     <span id="cart" class="ml-3">Cart</span>
-    <span class="ml-1" id="cart_count">2</span>
+    <span class="ml-1" id="cart_count">{cartItems.length}</span>
   </div>
 </nav>
 }

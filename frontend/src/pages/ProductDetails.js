@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
-export default function ProductDetails() {
+export default function ProductDetails({cartItems ,setCartItems}) {
  const[product, setProduct]=useState(null);
+ const[qty, setQty] = useState(1);
+
 const {id} = useParams()
 
  useEffect(() => {
@@ -11,6 +13,16 @@ const {id} = useParams()
     .then(res => setProduct(res.product))
 
   }, [])
+
+  function addToCart() {
+   const itemExist = cartItems.find((item)=> item.product._id == product._id)
+    
+   if(!itemExist){
+       const newItem = {product, qty};
+        setCartItems((state)=> [...state, newItem]);
+   }
+  }
+
 
     return product && <div className="container container-fluid">
         <div className="row f-flex justify-content-around">
@@ -35,11 +47,11 @@ const {id} = useParams()
                 <div className="stockCounter d-inline">
                     <span className="btn btn-danger minus">-</span>
 
-                    <input type="number" className="form-control count d-inline" value="1" readOnly />
+                    <input type="number" className="form-control count d-inline" value={qty} readOnly />
 
                     <span className="btn btn-primary plus">+</span>
                 </div>
-                <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
+                <button type="button" onClick={addToCart} id="cart_btn" className="btn btn-primary d-inline ml-4">Add to Cart</button>
 
                 <hr />
 
