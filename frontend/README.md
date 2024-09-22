@@ -1231,3 +1231,25 @@ function App() {
 }
 
 export default App;
+
+
+# Showing Toast Message
+
+* --> to install ---  npm i react-toastify
+
+## app.js
+
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+
+function app (){
+  <ToastContainer theme='dark' position='top-center'/>
+  }
+
+
+## productdetails.js
+
+import { toast } from 'react-toastify';
+
+ toast.success("Cart Item added successfully")
