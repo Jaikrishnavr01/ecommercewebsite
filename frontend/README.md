@@ -1253,3 +1253,20 @@ function app (){
 import { toast } from 'react-toastify';
 
  toast.success("Cart Item added successfully")
+
+
+ # increase and decrease cart items
+ * -->  product details.js
+  
+     function increaseQty() {
+        if (product.stock == qty) {
+            return;
+        }
+        setQty((state) => state + 1);
+    }
+
+    function decreaseQty() {
+        if (qty > 1) {
+            setQty((state) => state - 1);
+        }
+    }
