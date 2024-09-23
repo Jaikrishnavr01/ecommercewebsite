@@ -269,3 +269,17 @@ exports.getProducts = async(req, res, next) => {
 }
 
 
+# upadting product Stock
+
+    cartItems.forEach(async(item)=>{
+      const product = await productModel.findById(item.product._id);
+      product.stock = product.stock - item.qty;
+      await product.save();
+    })
+
+    res.json({
+        success: true,
+        order,
+        message: "order works!"
+    })
+}
